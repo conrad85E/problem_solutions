@@ -1,6 +1,6 @@
 def rotate(direction: str, steps: int, start: int) -> tuple[int, int]:
     '''
-    Performs one move
+    Performs one move and returns the end position and number of times 0 digit was passed.
     
     :param direction: Direction of rotation ("L" or "R").
     :type direction: str
