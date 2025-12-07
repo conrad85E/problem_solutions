@@ -39,7 +39,7 @@ def next_invalid_id(num: int) -> int:
         curr_num_first_half_str = num_str[:len(num_str) // 2]
         curr_num_second_half_str = num_str[len(num_str) // 2:]
         curr_num_first_half_int, curr_num_second_half_int = int(curr_num_first_half_str), int(curr_num_second_half_str)
-        # Step 2a: If left side greater, then make right side equal left side
+        # Step 2a: If left side greater -> then make right side equal left side
         if curr_num_first_half_int > curr_num_second_half_int:
             next_inv_num_half_str = str(curr_num_first_half_int)
         # Step 2b: Otherwise add 1 to left side and make right side equal left side
