@@ -1,4 +1,12 @@
 def max_joltage(bank: str) -> int:
+    '''
+    Finds the biggest two digit number comprised from line of digits passed in.
+    
+    :param bank: Line of digits as a string.
+    :type bank: str
+    :return: The biggest two digit number from the bank.
+    :rtype: int
+    '''
     first_battery = float("-inf")
     second_battery = float("-inf")
 
@@ -24,4 +32,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # print(max_joltage("123456"))
