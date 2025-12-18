@@ -15,7 +15,7 @@ def max_joltage(bank: str) -> int:
     for i in range(bank_len):
         curr_battery = int(bank[i])
 
-        # l index denotes the approach of the end of the digit line
+        # "l" index denotes the approach of the end of the input digit line
         if (bank_len - i) >= num_biggest_batteries:
             l = 0
         else:
@@ -25,13 +25,13 @@ def max_joltage(bank: str) -> int:
             # Check if the current digit from input line is greater than current digit in the list of 12 biggest
             # Check always from the left
             if curr_battery > biggest_batteries[j]:
-                # The first digit in the list of biggest that is less -> becomes the current digit from the imput line
+                # The first digit in the list of biggest that is less -> becomes the current digit from the input line
                 biggest_batteries[j] = curr_battery
                 # Everithing to the right of it resets
                 biggest_batteries[j + 1:] = [float("-inf")] * (num_biggest_batteries - j - 1)
                 break
     
-    # Turn a list of digits into a number
+    # Turn the list of biggest digits into a number
     final_joltage = 0
     for i in range(num_biggest_batteries):
         final_joltage += biggest_batteries[i] * (10 ** (num_biggest_batteries - i - 1))

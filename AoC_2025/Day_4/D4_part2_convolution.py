@@ -1,8 +1,8 @@
 """
-PURPOSE: Solution to "AoC 2025 Day 4: part 1"
-METHOD: Convolution of NumPy Array using "Signal" modult from SciPy
+PURPOSE: Solution to "AoC 2025 Day 4: part 2"
+METHOD: Convolution of NumPy Array using "Signal" module from SciPy
 INPUT FILE: "D4_input.txt" (if not present -> refer to the link below)
-PROBLEM LINK: https://adventofcode.com/2025/day/4
+PROBLEM STATEMENT: https://adventofcode.com/2025/day/4 
 """
 
 import numpy as np
@@ -10,7 +10,7 @@ from scipy import signal
 
 def count_accessible_rollpaper(grid: list[int]) -> np.integer:
     '''
-    Counts how many rolls of paper are immediatly removable by forklifts.
+    Counts how many rolls of paper are removable by forklifts after repeating the process of removing.
     A roll of paper is removable if it has less than 4 roll papers in its immediate neighborhood.
     
     :param grid: A grid of paper rolls where 0 is empty space and 1 is a paper roll.
@@ -26,10 +26,21 @@ def count_accessible_rollpaper(grid: list[int]) -> np.integer:
     kernel = np.array([[-1, -1, -1],
                        [-1, 4, -1],
                        [-1, -1, -1]])
-    # Perform convolution
-    convolved = signal.convolve2d(grid_nd, kernel, mode='same')
-    # Return the number of positive elements in the resulting convolution
-    return np.sum(convolved > 0)
+    removed_rollpaper_sum = np.int64(0)
+    
+    while True:
+        # Step 1: Perform convolution with 1-layer zero-padding
+        convolved_grid = signal.convolve2d(grid_nd, kernel, mode='same')
+        # Step 2: Count positive numbers in the convolved output
+        rollpaper_to_remove = convolved_grid > 0
+        curr_pass_removed_rollpaper_sum = np.sum(rollpaper_to_remove)
+        # Step 3: If no positives (no removable paper rolls) -> return accumulated sum
+        if curr_pass_removed_rollpaper_sum == 0:
+            return removed_rollpaper_sum
+        # Step 4: Accumulate number of removable paper rolls
+        removed_rollpaper_sum += curr_pass_removed_rollpaper_sum
+        # Step 5: Remove removable paper rolls from the grid
+        grid_nd -= rollpaper_to_remove
 
 def main():
     grid = []
@@ -46,10 +57,10 @@ def main():
                 else:
                     raise ValueError("char = {char}. Grid has to consist of '@' and '.'")
             grid.append(row)
+    
 
-
-    accessible_rollpaper_num = count_accessible_rollpaper(grid)
-    print(accessible_rollpaper_num)
+    num_accessible_rollpaper = count_accessible_rollpaper(grid)
+    print(num_accessible_rollpaper)
 
 if __name__ == "__main__":
     main()
