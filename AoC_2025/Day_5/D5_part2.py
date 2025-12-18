@@ -1,3 +1,10 @@
+"""
+PURPOSE: Solution to "AoC 2025 Day 5: part 2"
+METHOD: Collect ranges > Sort them > Merge overlapping > Calc sum
+INPUT FILE: "D5_input.txt" (if not present -> refer to the link below)
+PROBLEM STATEMENT: https://adventofcode.com/2025/day/5 
+"""
+
 def sum_ranges(ranges: list[tuple[int, int]]) -> int:
     '''
     Accepts a sorted list of non-overlapping ranges.

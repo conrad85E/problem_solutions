@@ -1,3 +1,10 @@
+"""
+PURPOSE: Solution to "AoC 2025 Day 5: part 1"
+METHOD: Bruteforce (Save all ranges | Compare all IDs against the ranges)
+INPUT FILE: "D5_input.txt" (if not present -> refer to the link below)
+PROBLEM STATEMENT: https://adventofcode.com/2025/day/5 
+"""
+
 def main():
     with open("D5_input.txt", "r") as f:
         fresh_ingredients_id_ranges = []
